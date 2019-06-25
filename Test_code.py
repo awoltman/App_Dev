@@ -31,12 +31,31 @@ time_temp = ()
 def record_temps():
     try:
         while True:
-            named_tuple = time.localtime() # get struct_time
+            #named_tuple = time.localtime() # get struct_time
             time_string = time.strftime("%m/%d/%Y %H:%M.%S")
             Freezetime_temp = client.read_holding_registers(574,20,unit = UNIT)
-            one = Freezetime_temp.registers[0]
-            print(one)
-            time_temp = (time_string,Freezetime_temp.registers[0],Freezetime_temp.registers[1],Freezetime_temp.registers[2],Freezetime_temp.registers[3],Freezetime_temp.registers[4],Freezetime_temp.registers[5],Freezetime_temp.registers[6],Freezetime_temp.registers[7],Freezetime_temp.registers[8],Freezetime_temp.registers[9],Freezetime_temp.registers[10],Freezetime_temp.registers[11],Freezetime_temp.registers[12],Freezetime_temp.registers[13],Freezetime_temp.registers[14],Freezetime_temp.registers[15],Freezetime_temp.registers[16],Freezetime_temp.registers[17],Freezetime_temp.registers[18],Freezetime_temp.registers[19],Freezetime_temp.registers[20])
+            f_one = Freezetime_temp.registers[0]
+            f_two = Freezetime_temp.registers[1]
+            f_three = Freezetime_temp.registers[2]
+            f_four = Freezetime_temp.registers[3]
+            f_five = Freezetime_temp.registers[4]
+            f_six = Freezetime_temp.registers[5]
+            f_seven = Freezetime_temp.registers[6]
+            f_eight = Freezetime_temp.registers[7]
+            f_nine = Freezetime_temp.registers[8]
+            f_ten = Freezetime_temp.registers[9]
+            f_eleven = Freezetime_temp.registers[10]
+            f_twelve = Freezetime_temp.registers[11]
+            f_thirteen = Freezetime_temp.registers[12]
+            f_fourteen = Freezetime_temp.registers[13]
+            f_fifteen = Freezetime_temp.registers[14]
+            f_sixteen = Freezetime_temp.registers[15]
+            f_seventeen = Freezetime_temp.registers[16]
+            f_eighteen = Freezetime_temp.registers[17]
+            f_nineteen = Freezetime_temp.registers[18]
+            f_twenty = Freezetime_temp.registers[19]
+
+            time_temp = (time_string,f_one,f_two,f_three,f_four,f_five,f_six,f_seven,f_eight,f_nine,f_ten,f_eleven,f_twelve,f_thirteen,f_fourteen,f_fifteen,f_sixteen,f_seventeen,f_eighteen,f_nineteen,f_twenty)
             c.execute("INSERT INTO FREEZE_TIMES values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", time_temp)
             Temps_store = client.read_holding_registers(6,4,unit =UNIT)
             temp_temp = (time_string, Temps_store.registers[0],Temps_store.registers[1],Temps_store.registers[2],Temps_store.registers[3])
