@@ -77,16 +77,22 @@ def record_temps():
         '''
         conn.close()
         pass
+def reset_default():
+    client.write_registers(451,1,unit =UNIT)
+    pass
 
 def select():
     print('C for collect')
     print('D for done')
+    print('R for reset defaults')
     g = input('Enter what you would like to do:')
 
     if(g == 'C'):
         record_temps()
     elif(g == 'D'):
         client.close()
+    elif(g == 'R'):
+        reset_default()
     else:
         select()
 
