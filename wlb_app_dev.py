@@ -4,13 +4,13 @@ import xlwt
 from datetime import datetime
 import sqlite3
 import time
-def init():
-    conn = sqlite3.connect('test_data.db')
-    client = ModbusClient(mesthod = 'tcp', host = '10.81.7.195', port = 8899)
-    UNIT = 0x01
+#def init():
+conn = sqlite3.connect('test_data.db')
+client = ModbusClient(mesthod = 'tcp', host = '10.81.7.195', port = 8899)
+UNIT = 0x01
 
-    c = conn.cursor()
-    time_temp = ()
+c = conn.cursor()
+time_temp = ()
 '''
 ## Initialized the database(.db) file ##
 c.execute("CREATE TABLE TEMPS ('Time', 'T1', 'T2', 'T3', 'T4')")
@@ -29,6 +29,7 @@ ws.write(0, 3, 'T3', style0)
 ws.write(0, 4, 'T4', style0)
 ws.write(0, 4, 'Time', style0)
 '''
+i = 0
 def record_temps():
     try:
         while True:
@@ -55,8 +56,9 @@ def record_temps():
             f_eighteen = Freezetime_temp.registers[17]
             f_nineteen = Freezetime_temp.registers[18]
             f_twenty = Freezetime_temp.registers[19]
-
-            time_temp = (time_string,f_one,f_two,f_three,f_four,f_five,f_six,f_seven,f_eight,f_nine,f_ten,f_eleven,f_twelve,f_thirteen,f_fourteen,f_fifteen,f_sixteen,f_seventeen,f_eighteen,f_nineteen,f_twenty)
+            
+            time_temp = [time_string,f_one,f_two,f_three,f_four,f_five,f_six,f_seven,f_eight,f_nine,f_ten,f_eleven,f_twelve,f_thirteen,f_fourteen,f_fifteen,f_sixteen,f_seventeen,f_eighteen,f_nineteen,f_twenty]
+            
             c.execute("INSERT INTO FREEZE_TIMES values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", time_temp)
             Temps_store = client.read_holding_registers(6,4,unit =UNIT)
             temp_temp = (time_string, Temps_store.registers[0],Temps_store.registers[1],Temps_store.registers[2],Temps_store.registers[3])
@@ -96,3 +98,13 @@ def select():
         reset_default()
     else:
         select()
+
+def login():
+    pass
+def new_user():
+    pass
+def fogot_id():
+    pass
+def diplay_rt():
+    pass
+select()
